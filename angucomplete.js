@@ -40,7 +40,7 @@ angular.module('angucomplete', [] )
             $scope.searchStr = null;
             $scope.clicktoexpand = false;
 
-            if ($scope.expandOnClick) {
+            if ($scope.expandOnClick && $scope.expandOnClick == "true") {
                 $scope.clicktoexpand = true;
             }
                 
