@@ -183,6 +183,20 @@ angular.module('angucomplete', [] )
                     event.preventDefault();
                 }
             }
+            
+            // Show list when clicked
+            $scope.clicked = function () {
+
+                $scope.showDropdown = true;
+                $scope.currentIndex = -1;
+                $scope.results = [];
+
+                if ($scope.localData) {
+
+                    $scope.searching = false;
+                    $scope.processResults($scope.localData, "");
+                }
+            }
 
             $scope.selectResult = function(result) {
                 if ($scope.matchClass) {
@@ -198,6 +212,19 @@ angular.module('angucomplete', [] )
             var inputField = elem.find('input');
 
             inputField.on('keyup', $scope.keyPressed);
+            
+            inputField.on('click', $scope.clicked);
+
+            elem.on("click", function () {
+                if ($scope.results && ($scope.currentIndex + 1) < $scope.results.length) {
+                    $scope.currentIndex++;
+                    $scope.$apply();
+                    event.preventDefault;
+                    event.stopPropagation();
+                }
+
+                $scope.$apply();
+            });            
 
             elem.on("keyup", function (event) {
                 if(event.which === 40) {
